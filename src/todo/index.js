@@ -3,32 +3,46 @@ import * as R from 'ramda';
 
 export class Model {
     text;
-    sSink;
+    sRemoveSink;
+    sCompleteSink;
     completed;
     createdAt;
     completedAt;
 
     constructor(text,
-                sSink,
+                sRemoveSink,
+                sCompleteSink,
                 completed = false,
                 createdAt = new Date(),
                 completedAt = null)
     {
-        this.sSink = sSink;
+        this.sRemoveSink = sRemoveSink;
+        this.sCompleteSink = sCompleteSink;
         this.text = text;
         this.completed = completed;
         this.createdAt = createdAt;
         this.completedAt = completedAt;
     }
 
-    toggleComplete = () =>
+    removeTodo = R.curry((index, event) =>
     {
-        this.completed = !this.completed;
-    };
+        this.sRemoveSink.send(index);
+    });
+
+    toggleComplete = R.curry((index, event) =>
+    {
+        this.sCompleteSink.send(index);
+    });
 }
 
 export const View = (model) =>
 {
-    return model.map(({toggleComplete, text}, index) => <div key={index} onClick={toggleComplete}>{text}</div>)
+    return model.map(({toggleComplete, removeTodo, text, completedAt = ""}, index) =>
+        <div key={index} >
+            <span onClick={toggleComplete(index)}>complete todo</span>
+            <span onClick={removeTodo(index)}>remove todo</span>
+            <p >{text}</p>
+            <p>{completedAt ? completedAt.toString() : ""}</p>
+        </div>)
 };
 

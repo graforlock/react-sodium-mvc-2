@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {StreamSink} from 'sodiumjs';
+import { StreamSink } from 'sodiumjs';
 
-import {Model, View} from './todo-list/index';
+import { Model, View } from './todo-list/index';
 
 class TodoApp {
     static main(model, id = '#root')
