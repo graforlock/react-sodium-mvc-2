@@ -31,7 +31,6 @@ class Update
     }
 }
 
-/* should be stateless, .renderTodos doesnt belong here */
 export const View = ({sAddTodo, model}) =>
 {
     return (
@@ -41,6 +40,3 @@ export const View = ({sAddTodo, model}) =>
         </section>
     );
 };
-
-
-// Driver should ascertain whether its composable or mountable.
