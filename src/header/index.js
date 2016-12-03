@@ -1,8 +1,6 @@
 import React from 'react';
 import * as R from 'ramda';
 
-// const log = d => { console.log(d); return d; };
-
 export default (props) =>
 {
     const preventDefault = event =>

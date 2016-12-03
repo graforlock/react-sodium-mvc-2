@@ -3,18 +3,18 @@ import * as R from 'ramda';
 
 export class Model {
     text;
-    sink$;
+    sSink;
     completed;
     createdAt;
     completedAt;
 
     constructor(text,
-                sink$,
-                completed,
+                sSink,
+                completed = false,
                 createdAt = new Date(),
-                completedAt = new Date())
+                completedAt = null)
     {
-        this.sink$ = sink$;
+        this.sSink = sSink;
         this.text = text;
         this.completed = completed;
         this.createdAt = createdAt;
@@ -27,7 +27,8 @@ export class Model {
     };
 }
 
-export const View = props => <div onClick={props.toggle}>
-    {props.text}
-</div>;
+export const View = (model) =>
+{
+    return model.map(({toggleComplete, text}, index) => <div key={index} onClick={toggleComplete}>{text}</div>)
+};
 

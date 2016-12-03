@@ -1,8 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import {StreamSink} from 'sodiumjs';
 
-ReactDOM.render(
-    <App />,
-    document.getElementById('root')
-);
+import {Model, View} from './todo-list/index';
+
+class TodoApp {
+    static main(model, id = '#root')
+    {
+        const todoListSink$ = new StreamSink(),
+              TodoModel = new Model(model, todoListSink$),
+              sAddTodo = (value) => todoListSink$.send(value);
+
+        TodoModel.sTodoList.listen(model =>
+        {
+            ReactDOM.render(
+                <View sAddTodo={sAddTodo}
+                             model={model}/>,
+                document.querySelector(id)
+            );
+        });
+    }
+}
+
+TodoApp.main([]);
