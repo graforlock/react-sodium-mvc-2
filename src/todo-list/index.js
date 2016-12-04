@@ -50,15 +50,20 @@ class Update
         acc[index].completedAt = completedAt;
         return acc;
     }
+
+    static clearCompleted(UNIT, acc)
+    {
+        return acc.filter(todo => todo.completedAt);
+    }
 }
 
-export const View = ({sAddTodo, model}) =>
+export const View = ({sAddTodo, sClearTodos, model}) =>
 {
     return (
         <section className="main">
             <Header addTodo={sAddTodo}/>
             <ul className="todo-list">{ Todo.View(model) }</ul>
-            <Archive model={model} />
+            <Archive model={model} clearTodos={sClearTodos}/>
         </section>
     );
 };

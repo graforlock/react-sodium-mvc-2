@@ -9,12 +9,14 @@ class TodoApp {
     {
         const todoListSink$ = new StreamSink(),
               TodoModel = new Model(model, todoListSink$),
-              sAddTodo = (value) => todoListSink$.send(value);
+              sAddTodo = (value) => todoListSink$.send(value),
+              sClearTodos  = null;
 
         TodoModel.sTodoList.listen(model =>
         {
             ReactDOM.render(
                 <View sAddTodo={sAddTodo}
+                      sClearTodos={sClearTodos}
                              model={model}/>,
                 document.querySelector(id)
             );
