@@ -45,9 +45,9 @@ class Update
         return acc;
     }
 
-    static completeTodo(index, acc)
+    static completeTodo({index, completedAt}, acc)
     {
-        acc[index].completedAt = new Date();
+        acc[index].completedAt = completedAt;
         return acc;
     }
 }
@@ -55,9 +55,9 @@ class Update
 export const View = ({sAddTodo, model}) =>
 {
     return (
-        <section>
+        <section className="todoapp">
             <Header addTodo={sAddTodo}/>
-            { Todo.View(model) }
+            <ul className="todo-list">{ Todo.View(model) }</ul>
             <Archive model={model} />
         </section>
     );

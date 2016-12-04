@@ -31,18 +31,20 @@ export class Model {
 
     toggleComplete = R.curry((index, event) =>
     {
-        this.sCompleteSink.send(index);
+        this.completedAt = this.completedAt ? null : new Date();
+        this.sCompleteSink.send({index, completedAt: this.completedAt});
     });
 }
 
 export const View = (model) =>
 {
-    return model.map(({toggleComplete, removeTodo, text, completedAt = ""}, index) =>
-        <div key={index} >
-            <span onClick={toggleComplete(index)}>complete todo</span>
-            <span onClick={removeTodo(index)}>remove todo</span>
-            <p >{text}</p>
-            <p>{completedAt ? completedAt.toString() : ""}</p>
-        </div>)
+    return model.map(({toggleComplete, removeTodo, text, completedAt}, index) =>
+        <li key={index} className={completedAt ? 'completed' : ''}>
+            <div className="view">
+                <input className="toggle" type="checkbox" onClick={toggleComplete(index)}></input>
+                <button className="destroy" onClick={removeTodo(index)}></button>
+                <label >{text}</label>
+            </div>
+        </li>)
 };
 

@@ -11,6 +11,7 @@ export default (props) =>
     const extractData = R.compose(R.prop('value'), R.head, R.prop('target'));
 
     return <form onSubmit={R.compose(props.addTodo, extractData, preventDefault)}>
-        <input type="text"/>
+        <h1>todos</h1>
+        <input className="new-todo" type="text"/>
     </form>
 }
