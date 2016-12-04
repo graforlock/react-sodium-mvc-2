@@ -41,7 +41,7 @@ export const View = (model) =>
     return model.map(({toggleComplete, removeTodo, text, completedAt}, index) =>
         <li key={index} className={completedAt ? 'completed' : ''}>
             <div className="view">
-                <input className="toggle" type="checkbox" onClick={toggleComplete(index)}></input>
+                <input className="toggle" type="checkbox" onClick={toggleComplete(index)}/>
                 <button className="destroy" onClick={removeTodo(index)}></button>
                 <label >{text}</label>
             </div>
