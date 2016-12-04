@@ -5,7 +5,7 @@ import { StreamSink } from 'sodiumjs';
 import { Model, View } from './todo-list/index';
 
 class TodoApp {
-    static main(model, id = '#root')
+    static main(model, id = '.todoapp')
     {
         const todoListSink$ = new StreamSink(),
               TodoModel = new Model(model, todoListSink$),

@@ -55,7 +55,7 @@ class Update
 export const View = ({sAddTodo, model}) =>
 {
     return (
-        <section className="todoapp">
+        <section className="main">
             <Header addTodo={sAddTodo}/>
             <ul className="todo-list">{ Todo.View(model) }</ul>
             <Archive model={model} />

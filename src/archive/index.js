@@ -12,6 +12,6 @@ export default ({model}) => {
         .orElse(() => <p>0 completed.</p>)
         .flatMap(R.identity);
 
-    return <section>{ safeRender }</section>;
+    return <section className="footer">{ safeRender }</section>;
 
 };
