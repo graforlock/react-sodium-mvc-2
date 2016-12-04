@@ -58,7 +58,7 @@ export const View = ({sAddTodo, model}) =>
         <section>
             <Header addTodo={sAddTodo}/>
             { Todo.View(model) }
-            <Archive />
+            <Archive model={model} />
         </section>
     );
 };
