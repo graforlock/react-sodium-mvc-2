@@ -30,7 +30,7 @@ export class Model {
         return this;
     }
 
-    uncompleteTodo()
+    incompleteTodo()
     {
         this.completedAt = null;
         return this;
@@ -38,7 +38,7 @@ export class Model {
 
     setTodoState()
     {
-        if(this.completedAt) this.uncompleteTodo();
+        if(this.completedAt) this.incompleteTodo();
         else this.completeTodo();
     }
 

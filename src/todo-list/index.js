@@ -74,7 +74,7 @@ class Update
 
         return accumulator
             .map(todos => todos.map(todo => todo.completeTodo()))
-            .orElse(todos => Right.of(todos.map(todo => todo.uncompleteTodo())))
+            .orElse(todos => Right.of(todos.map(todo => todo.incompleteTodo())))
             .__value;
     }
 }
