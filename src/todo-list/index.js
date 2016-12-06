@@ -68,7 +68,6 @@ class Update
 
     static toggleTodos(UNIT, acc)
     {
-        let xLens = R.lensProp('completedAt');
         let accumulator = acc.filter(todo => todo.completedAt).length === acc.length
             ? Left.of(acc)
             : Right.of(acc);
