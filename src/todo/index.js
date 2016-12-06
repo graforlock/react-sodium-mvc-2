@@ -24,6 +24,24 @@ export class Model {
         this.completedAt = completedAt;
     }
 
+    completeTodo()
+    {
+        this.completedAt = new Date();
+        return this;
+    }
+
+    uncompleteTodo()
+    {
+        this.completedAt = null;
+        return this;
+    }
+
+    setTodoState()
+    {
+        if(this.completedAt) this.uncompleteTodo();
+        else this.completeTodo();
+    }
+
     removeTodo = R.curry((index, event) =>
     {
         this.sRemoveSink.send(index);
@@ -31,7 +49,7 @@ export class Model {
 
     toggleComplete = R.curry((index, event) =>
     {
-        this.completedAt = this.completedAt ? null : new Date();
+        this.setTodoState();
         this.sCompleteSink.send({index, completedAt: this.completedAt});
     });
 }

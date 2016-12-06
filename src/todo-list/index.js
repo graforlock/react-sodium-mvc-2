@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import {StreamSink, Transaction, CellLoop} from 'sodiumjs';
+import * as R from 'ramda';
+
+import {Left, Right} from '../lib/either';
 
 import * as Todo from '../todo/index';
 import Header from '../header';
@@ -65,13 +68,15 @@ class Update
 
     static toggleTodos(UNIT, acc)
     {
-        let allChecked = acc.filter(todo => todo.completedAt).length === acc.length;
+        let xLens = R.lensProp('completedAt');
+        let accumulator = acc.filter(todo => todo.completedAt).length === acc.length
+            ? Left.of(acc)
+            : Right.of(acc);
 
-        return acc.map(todo => {
-            if(!allChecked && todo.completedAt) return todo;
-            todo.completedAt = allChecked ? null : new Date();
-            return todo;
-        });
+        return accumulator
+            .map(todos => todos.map(todo => todo.completeTodo()))
+            .orElse(todos => Right.of(todos.map(todo => todo.uncompleteTodo())))
+            .__value;
     }
 }
 
