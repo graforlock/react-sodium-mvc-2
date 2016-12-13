@@ -51,14 +51,12 @@ class Update
 
     static removeTodo(index, acc)
     {
-        acc.splice(index, 1);
-        return acc;
+        return R.remove(index, 1, acc);
     }
 
     static completeTodo({index, completedAt}, acc)
     {
-        acc[index].completedAt = completedAt;
-        return acc;
+        return R.over(R.lensIndex(index), R.assoc('completedAt', completedAt), acc);
     }
 
     static clearTodos(UNIT, acc)
