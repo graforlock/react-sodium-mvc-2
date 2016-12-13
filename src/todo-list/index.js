@@ -43,26 +43,16 @@ export class Model {
 
 class Update
 {
-    static addTodo(todo, acc)
-    {
-        acc.push(todo);
-        return acc;
-    }
+    static addTodo = (todo, acc) => R.append(todo, acc);
 
-    static removeTodo(index, acc)
-    {
-        return R.remove(index, 1, acc);
-    }
+    static removeTodo = (index, acc) => R.remove(index, 1, acc);
 
     static completeTodo({index, completedAt}, acc)
     {
         return R.over(R.lensIndex(index), R.assoc('completedAt', completedAt), acc);
     }
 
-    static clearTodos(UNIT, acc)
-    {
-        return acc.filter(todo => !todo.completedAt);
-    }
+    static clearTodos = (UNIT, acc) => acc.filter(todo => !todo.completedAt);
 
     static toggleTodos(UNIT, acc)
     {
